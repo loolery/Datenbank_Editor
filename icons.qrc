@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/icons/16x16/done.ico</file>
+        <file>resources/icons/16x16/open.ico</file>
+        <file>resources/icons/16x16/quit.ico</file>
+        <file>resources/icons/16x16/save.ico</file>
+    </qresource>
+</RCC>

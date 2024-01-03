@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>sqlite3.dll</file>
+    </qresource>
+</RCC>

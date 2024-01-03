@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/16x16">
+        <file>16x16/done.ico</file>
+        <file>16x16/open.ico</file>
+        <file>16x16/quit.ico</file>
+        <file>16x16/save.ico</file>
+    </qresource>
+</RCC>
