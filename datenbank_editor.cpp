@@ -4,7 +4,7 @@
 #include "datenbank_editor.h"
 #include "ui_datenbank_editor.h"
 
-SQLiteDatabase db("database.db3"); // Erstellt das Objekt der SQliteDB
+SQLiteDatabase db("default.db3"); // Erstellt das Objekt der SQliteDB
 
 Datenbank_Editor::Datenbank_Editor(QWidget *parent)
     : QMainWindow(parent)
@@ -44,12 +44,12 @@ Datenbank_Editor::Datenbank_Editor(QWidget *parent)
 }
 
 void Datenbank_Editor::loadDb(){
-    db.setPageSize(22); // Setze die maximale anzahl von reihen die zurück gegegen werden sollen je Seite.
+    db.setPageSize(5); // Setze die maximale anzahl von reihen die zurück gegegen werden sollen je Seite.
 	if (!db.open()) { // Öffnet die Datenbank
 		qDebug() << "DB konnte nicht geöffnet werden!/n";
 	}
     resultLand = db.getLand(1); // Liest 1 Seite aus der Tabelle tbl_land.
-    qDebug() << QString::number(resultLand.size()) + " Länder gelade.";
+    qDebug() << QString::number(resultLand.size()) + " Länder geladen.";
     resultStadt = db.getStadt(1); // Liest 1 Seite aus der Tabelle tbl_stadt.
     qDebug() << QString::number(resultStadt.size()) + " Städte geladen.";
     resultPersonen = db.getPersonen(1); // Liest 1 Seite aus der Tabelle tbl_stadt.
@@ -57,11 +57,12 @@ void Datenbank_Editor::loadDb(){
 
     if(resultLand.size()>0){ // ausgabe der Länder in den radiobuttons
         for (int i=0; i<resultLand.size(); i++) {
+            qDebug() << "läuft noch..." << i;
 			Landradios[i]->setText(QString(resultLand[i].name));
 			Landradios[i]->show();
 		}
 	}
-	for(int i=0; i<Landradios.size(); i++){ //macht ungenutze radioButton wieder unsichtbar.
+    for(int i=0; i<Landradios.size(); i++){ //macht ungenutze radioButton wieder unsichtbar.
 		if(Landradios[i]->text() == "") { Landradios[i]->hide(); }
 	}
 
