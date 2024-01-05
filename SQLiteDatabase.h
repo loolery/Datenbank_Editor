@@ -23,7 +23,7 @@ public:
     SQLiteDatabase(const QString &fileName = "default.db3") {
         dbFile = fileName;
         mydb = QSqlDatabase::addDatabase("QSQLITE");
-        mydb.setDatabaseName(fileName);
+        mydb.setDatabaseName(dbFile);
         m_pageSize = 100;
     }
 
@@ -39,13 +39,14 @@ public:
     }
 
     QVector<Land> getLand(const int &page) {
+        QVector<Land> land;
         QStringList data;
         QSqlQuery query(mydb);
-        query.prepare("SELECT * FROM tbl_land LIMIT :pageSize OFFSET :offset");
+        qDebug() << dbFile;
+        query.prepare("SELECT * FROM tbl_land LIMIT (:pageSize) OFFSET (:offset)");
         query.bindValue(":pageSize", m_pageSize);
         query.bindValue(":offset", (page - 1) * m_pageSize);
         qDebug() << "SQL-Query: " + query.executedQuery();
-        QVector<Land> land;
         if (query.exec()) {
             while (query.next()) {
                 land.append({query.value(0).toInt(), query.value(1).toString(), query.value(3).toInt()});
